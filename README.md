@@ -2,12 +2,6 @@
 
 Plugin Additionalalerts pour GLPI
 
-Ce plugin est sur Transifex - Aidez-nous à le traduire :
-https://www.transifex.com/infotelGLPI/GLPI_additionalalerts/
-
-This plugin is on Transifex - Help us to translate :
-https://www.transifex.com/infotelGLPI/GLPI_additionalalerts/
-
 ### Français
 
 Ce plugin vous permet d'envoyer les alertes email supplémentaires :
