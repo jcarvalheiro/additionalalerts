@@ -169,3 +169,136 @@ msgstr "Machine sans numéro d'inventaire"
 #: inc/infocomalert.class.php:48
 msgid "Computer with no serial number"
 msgstr "Machine sans numéro de série"
+
+#: inc/additionalalert.class.php:197
+msgid "Tickets pending too long alert"
+msgstr "Alerte sur les tickets en attente depuis trop longtemps"
+
+msgid "Tickets pending too long since"
+msgstr "Tickets en attente depuis"
+
+msgid "No tickets pending too long since"
+msgstr "Pas de tickets en attente depuis"
+
+#: inc/additionalalert.class.php:197
+msgid "Equipment with no location alert"
+msgstr "Alerte sur les matériels sans emplacement"
+
+msgid "Equipments with no location"
+msgstr "Matériels sans emplacement"
+
+msgid "No equipment with no location"
+msgstr "Aucun matériel sans emplacement"
+
+msgid "No location"
+msgstr "Aucun emplacement"
+
+#: inc/equipmentwarrantyalert.class.php
+msgid "Warranty expired alert"
+msgstr "Alerte garantie expirée"
+
+#: inc/equipmentendoflifealert.class.php
+msgid "End of life alert"
+msgstr "Alerte fin de vie atteinte"
+
+#: inc/equipmentnotinventoriedalert.class.php
+msgid "Not inventoried since X days"
+msgstr "Non inventorié depuis X jours"
+
+#: inc/equipmentnoassignmentalert.class.php
+msgid "No assignment alert"
+msgstr "Alerte sans affectation"
+
+#: inc/equipmentmissinginfoalert.class.php
+msgid "Missing info alert"
+msgstr "Alerte informations manquantes"
+
+#: inc/computernotusedalert.class.php
+msgid "Computer not used since X days"
+msgstr "Ordinateur non utilisé depuis X jours"
+
+#: inc/peripheralnotlinkedalert.class.php
+msgid "Peripheral not linked alert"
+msgstr "Périphérique non rattaché"
+
+#: inc/equipmentbadlocationalert.class.php
+msgid "Bad location alert"
+msgstr "Alerte localisation obsolète"
+
+#: inc/equipmentmaintenancealert.class.php
+msgid "Maintenance alert"
+msgstr "Alerte maintenance"
+
+#: inc/equipmenthighincidentalert.class.php
+msgid "High incident alert"
+msgstr "Alerte nombre élevé de pannes"
+
+#: inc/equipmentwarrantyalert.class.php
+msgid "No equipment with expired warranty"
+msgstr "Aucun équipement avec une garantie expirée"
+
+msgid "Equipments with expired warranty:"
+msgstr "Équipements avec garantie expirée :"
+
+#: inc/equipmentendoflifealert.class.php
+msgid "No equipment with end of life reached"
+msgstr "Aucun équipement en fin de vie atteinte"
+
+msgid "Equipments with end of life reached:"
+msgstr "Équipements en fin de vie atteinte :"
+
+#: inc/equipmentnotinventoriedalert.class.php
+msgid "No equipment not inventoried since X days"
+msgstr "Aucun équipement non inventorié depuis X jours"
+
+msgid "Equipments not inventoried since X days:"
+msgstr "Équipements non inventoriés depuis X jours :"
+
+#: inc/equipmentnoassignmentalert.class.php
+msgid "No equipment without assignment"
+msgstr "Aucun équipement sans affectation"
+
+msgid "Equipments without assignment:"
+msgstr "Équipements sans affectation :"
+
+#: inc/equipmentmissinginfoalert.class.php
+msgid "No equipment with missing info"
+msgstr "Aucun équipement avec informations manquantes"
+
+msgid "Equipments with missing info:"
+msgstr "Équipements avec informations manquantes :"
+
+#: inc/computernotusedalert.class.php
+msgid "No computer not used since X days"
+msgstr "Aucun ordinateur non utilisé depuis X jours"
+
+msgid "Computers not used since X days:"
+msgstr "Ordinateurs non utilisés depuis X jours :"
+
+#: inc/peripheralnotlinkedalert.class.php
+msgid "No peripheral not linked"
+msgstr "Aucun périphérique non rattaché"
+
+msgid "Peripherals not linked:"
+msgstr "Périphériques non rattachés :"
+
+#: inc/equipmentbadlocationalert.class.php
+msgid "No equipment with bad location"
+msgstr "Aucun équipement avec localisation obsolète"
+
+msgid "Equipments with bad location:"
+msgstr "Équipements avec localisation obsolète :"
+
+#: inc/equipmentmaintenancealert.class.php
+msgid "No equipment with maintenance issue"
+msgstr "Aucun équipement avec problème de maintenance"
+
+msgid "Equipments with maintenance issue:"
+msgstr "Équipements avec problème de maintenance :"
+
+#: inc/equipmenthighincidentalert.class.php
+msgid "No equipment with high incident count"
+msgstr "Aucun équipement avec un nombre élevé de pannes"
+
+msgid "Equipments with high incident count:"
+msgstr "Équipements avec un nombre élevé de pannes :"

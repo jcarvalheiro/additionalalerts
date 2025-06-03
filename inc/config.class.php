@@ -169,6 +169,20 @@ class PluginAdditionalalertsConfig extends CommonDBTM {
       echo "&nbsp;"._n('Day', 'Days', 2)."</td></tr>";
       echo "</td></tr>";
 
+      echo "<tr class='tab_bg_2'>";
+      echo "<td>" . __('Tickets pending too long alert', 'additionalalerts') . "</td><td>";
+      Alert::dropdownIntegerNever('delay_ticket_pending',
+                                  $this->fields["delay_ticket_pending"],
+                                  ['max'=>99]);
+      echo "&nbsp;"._n('Day', 'Days', 2)."</td></tr>";
+      echo "</td></tr>";
+
+      echo "<tr class='tab_bg_2'>";
+      echo "<td>" . __('Equipment with no location alert', 'additionalalerts') . "</td><td>";
+      Alert::dropdownYesNo(['name'=>"use_equipment_noloc_alert",
+                              'value'=>$this->fields["use_equipment_noloc_alert"]]);
+      echo "</td></tr>";
+
       echo "<tr class='tab_bg_2'><td class='center' colspan='2'>";
       echo Html::hidden('id', ['value' => 1]);
       echo "</td></tr>";
@@ -207,6 +221,42 @@ class PluginAdditionalalertsConfig extends CommonDBTM {
 
    public function getDelayTicketHighPriority() {
       return $this->fields['delay_ticket_high_priority'];
+   }
+   public function getDelayTicketPending() {
+      return $this->fields['delay_ticket_pending'];
+   }
+   public function useEquipmentNoLocAlert() {
+      return $this->fields['use_equipment_noloc_alert'];
+   }
+   public function useEquipmentWarrantyAlert() {
+      return isset($this->fields['use_equipment_warranty_alert']) ? $this->fields['use_equipment_warranty_alert'] : 0;
+   }
+   public function useEquipmentEndOfLifeAlert() {
+      return isset($this->fields['use_equipment_endoflife_alert']) ? $this->fields['use_equipment_endoflife_alert'] : 0;
+   }
+   public function useEquipmentNotInventoriedAlert() {
+      return isset($this->fields['use_equipment_notinventoried_alert']) ? $this->fields['use_equipment_notinventoried_alert'] : 0;
+   }
+   public function useEquipmentNoAssignmentAlert() {
+      return isset($this->fields['use_equipment_noassignment_alert']) ? $this->fields['use_equipment_noassignment_alert'] : 0;
+   }
+   public function useEquipmentMissingInfoAlert() {
+      return isset($this->fields['use_equipment_missinginfo_alert']) ? $this->fields['use_equipment_missinginfo_alert'] : 0;
+   }
+   public function useComputerNotUsedAlert() {
+      return isset($this->fields['use_computer_notused_alert']) ? $this->fields['use_computer_notused_alert'] : 0;
+   }
+   public function usePeripheralNotLinkedAlert() {
+      return isset($this->fields['use_peripheral_notlinked_alert']) ? $this->fields['use_peripheral_notlinked_alert'] : 0;
+   }
+   public function useEquipmentBadLocationAlert() {
+      return isset($this->fields['use_equipment_badlocation_alert']) ? $this->fields['use_equipment_badlocation_alert'] : 0;
+   }
+   public function useEquipmentMaintenanceAlert() {
+      return isset($this->fields['use_equipment_maintenance_alert']) ? $this->fields['use_equipment_maintenance_alert'] : 0;
+   }
+   public function useEquipmentHighIncidentAlert() {
+      return isset($this->fields['use_equipment_highincident_alert']) ? $this->fields['use_equipment_highincident_alert'] : 0;
    }
 }
 

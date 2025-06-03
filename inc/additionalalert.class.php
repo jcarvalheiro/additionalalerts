@@ -237,6 +237,114 @@ class PluginAdditionalalertsAdditionalalert extends CommonDBTM {
          }
       }
 
+      // Affichage des tickets en attente depuis trop longtemps
+      $delay_ticket_pending = $config->getDelayTicketPending();
+      $additionalalerts_ticket_pending = 0;
+      $CronTask = new CronTask();
+      if ($CronTask->getFromDBbyName("PluginAdditionalalertsTicketPending", "AdditionalalertsTicketPending")) {
+         if ($CronTask->fields["state"] != CronTask::STATE_DISABLE && $delay_ticket_pending > 0) {
+            $additionalalerts_ticket_pending = 1;
+         }
+      }
+      if ($additionalalerts_ticket_pending != 0) {
+         $entities = [$_SESSION["glpiactive_entity"] => $delay_ticket_pending];
+         foreach ($entities as $entity => $delay) {
+            $query = PluginAdditionalalertsTicketPending::query($delay, $entity);
+            $result = $DB->query($query);
+            $nbcol = 5;
+            if ($DB->numrows($result) > 0) {
+               echo "<div align='center'><table class='tab_cadre' cellspacing='2' cellpadding='3'><tr><th colspan='$nbcol'>";
+               echo __('Tickets pending too long since', 'additionalalerts') . " " . $delay . " " . _n('Day', 'Days', 2) . ", " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</th></tr>";
+               echo "<tr><th>" . __('Title') . "</th>";
+               echo "<th>" . __('Entity') . "</th>";
+               echo "<th>" . __('Status') . "</th>";
+               echo "<th>" . __('Opening date') . "</th>";
+               echo "<th>" . __('Last update') . "</th></tr>";
+               while ($data = $DB->fetchArray($result)) {
+                  echo PluginAdditionalalertsTicketPending::displayBody($data);
+               }
+               echo "</table></div>";
+            } else {
+               echo "<br><div align='center'><b>" . __('No tickets pending too long since', 'additionalalerts') . " " . $delay . " " . _n('Day', 'Days', 2) . ", " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</b></div>";
+            }
+            echo "<br>";
+         }
+      }
+
+      // Affichage des matériels sans emplacement
+      $use_equipment_noloc_alert = $config->useEquipmentNoLocAlert();
+      $additionalalerts_equipment_noloc = 0;
+      $CronTask = new CronTask();
+      if ($CronTask->getFromDBbyName("PluginAdditionalalertsEquipmentNoLoc", "AdditionalalertsEquipmentNoLoc")) {
+         if ($CronTask->fields["state"] != CronTask::STATE_DISABLE && $use_equipment_noloc_alert > 0) {
+            $additionalalerts_equipment_noloc = 1;
+         }
+      }
+      if ($additionalalerts_equipment_noloc != 0) {
+         $entities = [$_SESSION["glpiactive_entity"] => 1];
+         foreach ($entities as $entity => $dummy) {
+            $query = PluginAdditionalalertsEquipmentNoLoc::query($entity);
+            $result = $DB->query($query);
+            $nbcol = Session::isMultiEntitiesMode() ? 7 : 6;
+            if ($DB->numrows($result) > 0) {
+               echo "<div align='center'><table class='tab_cadre' cellspacing='2' cellpadding='3'><tr><th colspan='$nbcol'>";
+               echo __('Equipments with no location', 'additionalalerts') . " - " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</th></tr>";
+               echo "<tr><th>" . __('Name') . "</th>";
+               if (Session::isMultiEntitiesMode()) {
+                  echo "<th>" . __('Entity') . "</th>";
+               }
+               echo "<th>" . __('Type') . "</th>";
+               echo "<th>" . __('Operating system') . "</th>";
+               echo "<th>" . __('Status') . "</th>";
+               echo "<th>" . __('Location') . "</th>";
+               echo "<th>" . __('User') . " / " . __('Group') . " / " . __('Alternate username') . "</th></tr>";
+               while ($data = $DB->fetchArray($result)) {
+                  echo PluginAdditionalalertsEquipmentNoLoc::displayBody($data);
+               }
+               echo "</table></div>";
+            } else {
+               echo "<br><div align='center'><b>" . __('No equipment with no location', 'additionalalerts') . " - " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</b></div>";
+            }
+            echo "<br>";
+         }
+      }
+
+      // Affichage des tickets sans catégorie
+      $use_ticket_no_category_alert = $config->useTicketNoCategoryAlert();
+      $additionalalerts_ticket_no_category = 0;
+      $CronTask = new CronTask();
+      if ($CronTask->getFromDBbyName("PluginAdditionalalertsTicketNoCategory", "AdditionalalertsTicketNoCategory")) {
+         if ($CronTask->fields["state"] != CronTask::STATE_DISABLE && $use_ticket_no_category_alert > 0) {
+            $additionalalerts_ticket_no_category = 1;
+         }
+      }
+      if ($additionalalerts_ticket_no_category != 0) {
+         $entities = [$_SESSION["glpiactive_entity"] => 1];
+         foreach ($entities as $entity => $dummy) {
+            $query = PluginAdditionalalertsTicketNoCategory::query($entity);
+            $result = $DB->query($query);
+            $nbcol = Session::isMultiEntitiesMode() ? 6 : 5;
+            if ($DB->numrows($result) > 0) {
+               echo "<div align='center'><table class='tab_cadre' cellspacing='2' cellpadding='3'><tr><th colspan='$nbcol'>";
+               echo __('Tickets with no category', 'additionalalerts') . " - " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</th></tr>";
+               echo "<tr><th>" . __('Title') . "</th>";
+               if (Session::isMultiEntitiesMode()) {
+                  echo "<th>" . __('Entity') . "</th>";
+               }
+               echo "<th>" . __('Status') . "</th>";
+               echo "<th>" . __('Opening date') . "</th>";
+               echo "<th>" . __('Last update') . "</th>";
+               echo "<th>" . __('Technician') . "</th></tr>";
+               while ($data = $DB->fetchArray($result)) {
+                  echo PluginAdditionalalertsTicketNoCategory::displayBody($data);
+               }
+               echo "</table></div>";
+            } else {
+               echo "<br><div align='center'><b>" . __('No tickets with no category', 'additionalalerts') . " - " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</b></div>";
+            }
+            echo "<br>";
+         }
+      }
       if ($additionalalerts_not_infocom == 0
           && $additionalalerts_ink == 0
           && $additionalalerts_ticket_unresolved == 0) {
@@ -350,6 +458,63 @@ class PluginAdditionalalertsAdditionalalert extends CommonDBTM {
             echo "<br>";
          }
       }
-   }
+
+      if (PluginAdditionalalertsConfig::getConfig()->useEquipmentWarrantyAlert()) {
+         echo '<h2>' . __('Warranty expired alert', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsEquipmentWarrantyAlert::displayAlerts();
+      }
+      if (PluginAdditionalalertsConfig::getConfig()->useEquipmentEndOfLifeAlert()) {
+         echo '<h2>' . __('End of life alert', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsEquipmentEndOfLifeAlert::displayAlerts();
+      }
+      if (PluginAdditionalalertsConfig::getConfig()->useEquipmentNotInventoriedAlert()) {
+         echo '<h2>' . __('Not inventoried since X days', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsEquipmentNotInventoriedAlert::displayAlerts();
+      }
+      if (PluginAdditionalalertsConfig::getConfig()->useEquipmentNoAssignmentAlert()) {
+         echo '<h2>' . __('No assignment alert', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsEquipmentNoAssignmentAlert::displayAlerts();
+      }
+      if (PluginAdditionalalertsConfig::getConfig()->useEquipmentMissingInfoAlert()) {
+         echo '<h2>' . __('Missing info alert', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsEquipmentMissingInfoAlert::displayAlerts();
+      }
+      if (PluginAdditionalalertsConfig::getConfig()->useComputerNotUsedAlert()) {
+         echo '<h2>' . __('Computer not used since X days', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsComputerNotUsedAlert::displayAlerts();
+      }
+      if (PluginAdditionalalertsConfig::getConfig()->usePeripheralNotLinkedAlert()) {
+         echo '<h2>' . __('Peripheral not linked alert', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsPeripheralNotLinkedAlert::displayAlerts();
+      }
+      if (PluginAdditionalalertsConfig::getConfig()->useEquipmentBadLocationAlert()) {
+         echo '<h2>' . __('Bad location alert', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsEquipmentBadLocationAlert::displayAlerts();
+      }
+      if (PluginAdditionalalertsConfig::getConfig()->useEquipmentMaintenanceAlert()) {
+         echo '<h2>' . __('Maintenance alert', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsEquipmentMaintenanceAlert::displayAlerts();
+      }
+      if (PluginAdditionalalertsConfig::getConfig()->useEquipmentHighIncidentAlert()) {
+         echo '<h2>' . __('High incident alert', 'additionalalerts') . '</h2>';
+         PluginAdditionalalertsEquipmentHighIncidentAlert::displayAlerts();
+      }
+    }
+
+   public static function getNotificationTargets() {
+        return [
+            'equipmentwarrantyexpired' => 'PluginAdditionalalertsNotificationTargetEquipmentWarrantyAlert',
+            'equipmentendoflife' => 'PluginAdditionalalertsNotificationTargetEquipmentEndOfLifeAlert',
+            'equipmentnotinventoried' => 'PluginAdditionalalertsNotificationTargetEquipmentNotInventoriedAlert',
+            'equipmentnoassignment' => 'PluginAdditionalalertsNotificationTargetEquipmentNoAssignmentAlert',
+            'equipmentmissinginfo' => 'PluginAdditionalalertsNotificationTargetEquipmentMissingInfoAlert',
+            'computernotused' => 'PluginAdditionalalertsNotificationTargetComputerNotUsedAlert',
+            'peripheralnotlinked' => 'PluginAdditionalalertsNotificationTargetPeripheralNotLinkedAlert',
+            'equipmentbadlocation' => 'PluginAdditionalalertsNotificationTargetEquipmentBadLocationAlert',
+            'equipmentmaintenance' => 'PluginAdditionalalertsNotificationTargetEquipmentMaintenanceAlert',
+            'equipmenthighincident' => 'PluginAdditionalalertsNotificationTargetEquipmentHighIncidentAlert',
+            // ...autres cibles existantes...
+        ];
+    }
 
 }
