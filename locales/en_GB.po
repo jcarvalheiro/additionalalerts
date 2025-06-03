@@ -102,3 +102,63 @@ msgid "Ticket unresolved"
 msgid_plural "Tickets unresolved"
 msgstr[0] "Ticket unresolved"
 msgstr[1] "Tickets unresolved"
+
+#: inc/additionalalert.class.php:197
+msgid "Tickets waiting for validation alert"
+msgstr "Tickets waiting for validation alert"
+
+#: inc/additionalalert.class.php:213
+msgid "Tickets waiting for validation since more"
+msgstr "Tickets waiting for validation since more"
+
+#: inc/additionalalert.class.php:219
+msgid "No tickets waiting for validation since more"
+msgstr "No tickets waiting for validation since more"
+
+#: inc/additionalalert.class.php:197
+msgid "Tickets waiting for user response alert"
+msgstr "Tickets waiting for user response alert"
+
+#: inc/additionalalert.class.php:213
+msgid "Tickets waiting for user response since more"
+msgstr "Tickets waiting for user response since more"
+
+#: inc/additionalalert.class.php:219
+msgid "No tickets waiting for user response since more"
+msgstr "No tickets waiting for user response since more"
+
+#: inc/additionalalert.class.php:197
+msgid "Technician open tickets threshold alert"
+msgstr "Technician open tickets threshold alert"
+
+msgid "Technicians with too many open tickets"
+msgstr "Technicians with too many open tickets"
+
+msgid "No technician with too many open tickets"
+msgstr "No technician with too many open tickets"
+
+msgid "Technician"
+msgstr "Technician"
+
+msgid "Number of open tickets"
+msgstr "Number of open tickets"
+
+#: inc/additionalalert.class.php:197
+msgid "High priority ticket alert"
+msgstr "High priority ticket alert"
+
+msgid "High priority tickets not processed since more"
+msgstr "High priority tickets not processed since more"
+
+msgid "No high priority tickets not processed since more"
+msgstr "No high priority tickets not processed since more"
+
+msgid "Priority"
+msgstr "Priority"
+
+#: inc/infocomalert.class.php:48
+msgid "Computer with no inventory number"
+msgstr "Computer with no inventory number"
+
+msgid "Computer with no serial number"
+msgstr "Computer with no serial number"

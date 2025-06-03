@@ -106,20 +106,19 @@ class PluginAdditionalalertsInfocomAlert extends CommonDBTM {
     */
    static function query($entity) {
       global $DB;
-
-      $query       = "SELECT `glpi_computers`.*, `glpi_items_operatingsystems`.`operatingsystems_id`
-                     FROM `glpi_computers`
-                     LEFT JOIN `glpi_infocoms` ON (`glpi_computers`.`id` = `glpi_infocoms`.`items_id` AND `glpi_infocoms`.`itemtype` = 'Computer')
-                     LEFT JOIN `glpi_items_operatingsystems` ON (`glpi_computers`.`id` = `glpi_items_operatingsystems`.`items_id` 
-                               AND `glpi_items_operatingsystems`.`itemtype` = 'Computer')
-                     WHERE `glpi_computers`.`is_deleted` = 0
-                     AND `glpi_computers`.`is_template` = 0
-                     AND `glpi_infocoms`.`buy_date` IS NULL ";
-
-      $query_type  = "SELECT `types_id`
-                    FROM `glpi_plugin_additionalalerts_notificationtypes` ";
+      $query = "SELECT `glpi_computers`.*, `glpi_items_operatingsystems`.`operatingsystems_id"
+         . " FROM `glpi_computers`"
+         . " LEFT JOIN `glpi_infocoms` ON (`glpi_computers`.`id` = `glpi_infocoms`.`items_id` AND `glpi_infocoms`.`itemtype` = 'Computer')"
+         . " LEFT JOIN `glpi_items_operatingsystems` ON (`glpi_computers`.`id` = `glpi_items_operatingsystems`.`items_id` AND `glpi_items_operatingsystems`.`itemtype` = 'Computer')"
+         . " WHERE `glpi_computers`.`is_deleted` = 0"
+         . " AND `glpi_computers`.`is_template` = 0"
+         . " AND ("
+         . "     `glpi_infocoms`.`buy_date` IS NULL"
+         . "     OR `glpi_computers`.`otherserial` IS NULL OR `glpi_computers`.`otherserial` = ''"
+         . "     OR `glpi_computers`.`serial` IS NULL OR `glpi_computers`.`serial` = ''"
+         . " )";
+      $query_type  = "SELECT `types_id` FROM `glpi_plugin_additionalalerts_notificationtypes` ";
       $result_type = $DB->query($query_type);
-
       if ($DB->numrows($result_type) > 0) {
          $query .= " AND (`glpi_computers`.`computertypes_id` != 0 ";
          while ($data_type = $DB->fetchArray($result_type)) {
@@ -129,9 +128,7 @@ class PluginAdditionalalertsInfocomAlert extends CommonDBTM {
          $query .= ") ";
       }
       $query .= "AND `glpi_computers`.`entities_id`= '" . $entity . "' ";
-
       $query .= " ORDER BY `glpi_computers`.`name` ASC";
-
       return $query;
    }
 
@@ -143,9 +140,7 @@ class PluginAdditionalalertsInfocomAlert extends CommonDBTM {
     */
    static function displayBody($data) {
       global $CFG_GLPI;
-
       $body = "<tr class='tab_bg_2'><td><a href=\"" . $CFG_GLPI["root_doc"] . "/front/computer.form.php?id=" . $data["id"] . "\">" . $data["name"];
-
       if ($_SESSION["glpiis_ids_visible"] == 1 || empty($data["name"])) {
          $body .= " (";
          $body .= $data["id"] . ")";
@@ -161,14 +156,10 @@ class PluginAdditionalalertsInfocomAlert extends CommonDBTM {
       $body .= "<td>";
       if (!empty($data["users_id"])) {
          $dbu = new DbUtils();
-         $body .= "<a href=\"" . $CFG_GLPI["root_doc"] . "/front/user.form.php?id=" . $data["users_id"] . "\">" .
-                  $dbu->getUserName($data["users_id"]) . "</a>";
-
+         $body .= "<a href=\"" . $CFG_GLPI["root_doc"] . "/front/user.form.php?id=" . $data["users_id"] . "\">" . $dbu->getUserName($data["users_id"]) . "</a>";
       }
       if (!empty($data["groups_id"])) {
-
          $body .= " - <a href=\"" . $CFG_GLPI["root_doc"] . "/front/group.form.php?id=" . $data["groups_id"] . "\">";
-
          $body .= Dropdown::getDropdownName("glpi_groups", $data["groups_id"]);
          if ($_SESSION["glpiis_ids_visible"] == 1) {
             $body .= " (";
@@ -179,7 +170,13 @@ class PluginAdditionalalertsInfocomAlert extends CommonDBTM {
       if (!empty($data["contact"])) {
          $body .= " - " . $data["contact"];
       }
-
+      // Ajout des alertes spécifiques
+      if (empty($data["otherserial"])) {
+         $body .= "<br><span style='color:red'>" . __('Computer with no inventory number', 'additionalalerts') . "</span>";
+      }
+      if (empty($data["serial"])) {
+         $body .= "<br><span style='color:red'>" . __('Computer with no serial number', 'additionalalerts') . "</span>";
+      }
       $body .= "</td>";
       $body .= "</tr>";
 
@@ -306,7 +303,7 @@ class PluginAdditionalalertsInfocomAlert extends CommonDBTM {
                                                'notinfocoms' => $notinfocoms])) {
                $message     = $notinfocom_messages[$type][$entity];
                $cron_status = 1;
-               if ($task) {
+               if $task) {
                   $task->log(Dropdown::getDropdownName("glpi_entities",
                                                        $entity) . ":  $message\n");
                   $task->addVolume(1);

@@ -106,3 +106,66 @@ msgid "Ticket unresolved"
 msgid_plural "Tickets unresolved"
 msgstr[0] "Ticket non résolu par technicien"
 msgstr[1] "Tickets non résolus par technicien"
+
+#: inc/additionalalert.class.php:197
+msgid "Tickets waiting for validation alert"
+msgstr "Alerte sur les tickets en attente de validation"
+
+#: inc/additionalalert.class.php:197
+msgid "Tickets waiting for validation since more"
+msgstr "Tickets en attente de validation depuis"
+
+#: inc/additionalalert.class.php:213
+msgid "No tickets waiting for validation since more"
+msgstr "Pas de tickets en attente de validation depuis"
+
+#: inc/additionalalert.class.php:197
+msgid "Tickets waiting for user response alert"
+msgstr "Alerte sur les tickets en attente de réponse utilisateur"
+
+msgid "Tickets waiting for user response since more"
+msgstr "Tickets en attente de réponse utilisateur depuis"
+
+msgid "No tickets waiting for user response since more"
+msgstr "Pas de tickets en attente de réponse utilisateur depuis"
+
+#: inc/additionalalert.class.php:197
+msgid "Technician open tickets threshold alert"
+msgstr "Alerte sur le seuil de tickets ouverts par technicien"
+
+#: inc/additionalalert.class.php:197
+msgid "Technicians with too many open tickets"
+msgstr "Techniciens avec trop de tickets ouverts"
+
+#: inc/additionalalert.class.php:197
+msgid "No technician with too many open tickets"
+msgstr "Aucun technicien avec trop de tickets ouverts"
+
+#: inc/additionalalert.class.php:197
+msgid "Technician"
+msgstr "Technicien"
+
+#: inc/additionalalert.class.php:197
+msgid "Number of open tickets"
+msgstr "Nombre de tickets ouverts"
+
+#: inc/additionalalert.class.php:197
+msgid "High priority ticket alert"
+msgstr "Alerte sur les tickets à priorité élevée"
+
+msgid "High priority tickets not processed since more"
+msgstr "Tickets à priorité élevée non traités depuis"
+
+msgid "No high priority tickets not processed since more"
+msgstr "Aucun ticket à priorité élevée non traité depuis"
+
+msgid "Priority"
+msgstr "Priorité"
+
+#: inc/infocomalert.class.php:48
+msgid "Computer with no inventory number"
+msgstr "Machine sans numéro d'inventaire"
+
+#: inc/infocomalert.class.php:48
+msgid "Computer with no serial number"
+msgstr "Machine sans numéro de série"

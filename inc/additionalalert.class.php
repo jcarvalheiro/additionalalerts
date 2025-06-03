@@ -103,6 +103,140 @@ class PluginAdditionalalertsAdditionalalert extends CommonDBTM {
          }
       }
 
+      // Affichage des tickets en attente de validation
+      $delay_ticket_waiting_validation = $config->getDelayTicketWaitingValidation();
+      $additionalalerts_ticket_waiting_validation = 0;
+      $CronTask = new CronTask();
+      if ($CronTask->getFromDBbyName("PluginAdditionalalertsTicketWaitingValidation", "AdditionalalertsTicketWaitingValidation")) {
+         if ($CronTask->fields["state"] != CronTask::STATE_DISABLE && $delay_ticket_waiting_validation > 0) {
+            $additionalalerts_ticket_waiting_validation = 1;
+         }
+      }
+      if ($additionalalerts_ticket_waiting_validation != 0) {
+         $entities = [$_SESSION["glpiactive_entity"] => $delay_ticket_waiting_validation];
+         foreach ($entities as $entity => $delay) {
+            $query = PluginAdditionalalertsTicketWaitingValidation::query($delay, $entity);
+            $result = $DB->query($query);
+            $nbcol = 5;
+            if ($DB->numrows($result) > 0) {
+               echo "<div align='center'><table class='tab_cadre' cellspacing='2' cellpadding='3'><tr><th colspan='$nbcol'>";
+               echo __('Tickets waiting for validation since more', 'additionalalerts') . " " . $delay . " " . _n('Day', 'Days', 2) . ", " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</th></tr>";
+               echo "<tr><th>" . __('Title') . "</th>";
+               echo "<th>" . __('Entity') . "</th>";
+               echo "<th>" . __('Status') . "</th>";
+               echo "<th>" . __('Opening date') . "</th>";
+               echo "<th>" . __('Last update') . "</th></tr>";
+               while ($data = $DB->fetchArray($result)) {
+                  echo PluginAdditionalalertsTicketWaitingValidation::displayBody($data);
+               }
+               echo "</table></div>";
+            } else {
+               echo "<br><div align='center'><b>" . __('No tickets waiting for validation since more', 'additionalalerts') . " " . $delay . " " . _n('Day', 'Days', 2) . ", " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</b></div>";
+            }
+            echo "<br>";
+         }
+      }
+
+      // Affichage des tickets en attente de réponse utilisateur
+      $delay_ticket_waiting_user = $config->getDelayTicketWaitingUser();
+      $additionalalerts_ticket_waiting_user = 0;
+      $CronTask = new CronTask();
+      if ($CronTask->getFromDBbyName("PluginAdditionalalertsTicketWaitingUser", "AdditionalalertsTicketWaitingUser")) {
+         if ($CronTask->fields["state"] != CronTask::STATE_DISABLE && $delay_ticket_waiting_user > 0) {
+            $additionalalerts_ticket_waiting_user = 1;
+         }
+      }
+      if ($additionalalerts_ticket_waiting_user != 0) {
+         $entities = [$_SESSION["glpiactive_entity"] => $delay_ticket_waiting_user];
+         foreach ($entities as $entity => $delay) {
+            $query = PluginAdditionalalertsTicketWaitingUser::query($delay, $entity);
+            $result = $DB->query($query);
+            $nbcol = 5;
+            if ($DB->numrows($result) > 0) {
+               echo "<div align='center'><table class='tab_cadre' cellspacing='2' cellpadding='3'><tr><th colspan='$nbcol'>";
+               echo __('Tickets waiting for user response since more', 'additionalalerts') . " " . $delay . " " . _n('Day', 'Days', 2) . ", " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</th></tr>";
+               echo "<tr><th>" . __('Title') . "</th>";
+               echo "<th>" . __('Entity') . "</th>";
+               echo "<th>" . __('Status') . "</th>";
+               echo "<th>" . __('Opening date') . "</th>";
+               echo "<th>" . __('Last update') . "</th></tr>";
+               while ($data = $DB->fetchArray($result)) {
+                  echo PluginAdditionalalertsTicketWaitingUser::displayBody($data);
+               }
+               echo "</table></div>";
+            } else {
+               echo "<br><div align='center'><b>" . __('No tickets waiting for user response since more', 'additionalalerts') . " " . $delay . " " . _n('Day', 'Days', 2) . ", " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</b></div>";
+            }
+            echo "<br>";
+         }
+      }
+
+      // Affichage des techniciens avec trop de tickets ouverts
+      $max_open_tickets_tech = $config->getMaxOpenTicketsTech();
+      $additionalalerts_ticket_open_tech = 0;
+      $CronTask = new CronTask();
+      if ($CronTask->getFromDBbyName("PluginAdditionalalertsTicketOpenTech", "AdditionalalertsTicketOpenTech")) {
+         if ($CronTask->fields["state"] != CronTask::STATE_DISABLE && $max_open_tickets_tech > 0) {
+            $additionalalerts_ticket_open_tech = 1;
+         }
+      }
+      if ($additionalalerts_ticket_open_tech != 0) {
+         $entities = [$_SESSION["glpiactive_entity"] => $max_open_tickets_tech];
+         foreach ($entities as $entity => $max) {
+            $query = PluginAdditionalalertsTicketOpenTech::query($max, $entity);
+            $result = $DB->query($query);
+            $nbcol = 2;
+            if ($DB->numrows($result) > 0) {
+               echo "<div align='center'><table class='tab_cadre' cellspacing='2' cellpadding='3'><tr><th colspan='$nbcol'>";
+               echo __('Technicians with too many open tickets', 'additionalalerts') . " (" . $max . ") - " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</th></tr>";
+               echo "<tr><th>" . __('Technician') . "</th>";
+               echo "<th>" . __('Number of open tickets') . "</th></tr>";
+               while ($data = $DB->fetchArray($result)) {
+                  echo PluginAdditionalalertsTicketOpenTech::displayBody($data);
+               }
+               echo "</table></div>";
+            } else {
+               echo "<br><div align='center'><b>" . __('No technician with too many open tickets', 'additionalalerts') . " (" . $max . ") - " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</b></div>";
+            }
+            echo "<br>";
+         }
+      }
+
+      // Affichage des tickets à priorité élevée non traités
+      $delay_ticket_high_priority = $config->getDelayTicketHighPriority();
+      $additionalalerts_ticket_high_priority = 0;
+      $CronTask = new CronTask();
+      if ($CronTask->getFromDBbyName("PluginAdditionalalertsTicketHighPriority", "AdditionalalertsTicketHighPriority")) {
+         if ($CronTask->fields["state"] != CronTask::STATE_DISABLE && $delay_ticket_high_priority > 0) {
+            $additionalalerts_ticket_high_priority = 1;
+         }
+      }
+      if ($additionalalerts_ticket_high_priority != 0) {
+         $entities = [$_SESSION["glpiactive_entity"] => $delay_ticket_high_priority];
+         foreach ($entities as $entity => $delay) {
+            $query = PluginAdditionalalertsTicketHighPriority::query($delay, $entity);
+            $result = $DB->query($query);
+            $nbcol = 6;
+            if ($DB->numrows($result) > 0) {
+               echo "<div align='center'><table class='tab_cadre' cellspacing='2' cellpadding='3'><tr><th colspan='$nbcol'>";
+               echo __('High priority tickets not processed since more', 'additionalalerts') . " " . $delay . " " . _n('Day', 'Days', 2) . ", " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</th></tr>";
+               echo "<tr><th>" . __('Title') . "</th>";
+               echo "<th>" . __('Entity') . "</th>";
+               echo "<th>" . __('Status') . "</th>";
+               echo "<th>" . __('Opening date') . "</th>";
+               echo "<th>" . __('Last update') . "</th>";
+               echo "<th>" . __('Priority') . "</th></tr>";
+               while ($data = $DB->fetchArray($result)) {
+                  echo PluginAdditionalalertsTicketHighPriority::displayBody($data);
+               }
+               echo "</table></div>";
+            } else {
+               echo "<br><div align='center'><b>" . __('No high priority tickets not processed since more', 'additionalalerts') . " " . $delay . " " . _n('Day', 'Days', 2) . ", " . __('Entity') . " : " . Dropdown::getDropdownName("glpi_entities", $entity) . "</b></div>";
+            }
+            echo "<br>";
+         }
+      }
+
       if ($additionalalerts_not_infocom == 0
           && $additionalalerts_ink == 0
           && $additionalalerts_ticket_unresolved == 0) {

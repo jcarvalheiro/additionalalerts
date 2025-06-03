@@ -137,6 +137,38 @@ class PluginAdditionalalertsConfig extends CommonDBTM {
       echo "&nbsp;"._n('Day', 'Days', 2)."</td></tr>";
       echo "</td></tr>";
 
+      echo "<tr class='tab_bg_2'>";
+      echo "<td>" . __('Tickets waiting for validation alert', 'additionalalerts') . "</td><td>";
+      Alert::dropdownIntegerNever('delay_ticket_waiting_validation',
+                                  $this->fields["delay_ticket_waiting_validation"],
+                                  ['max'=>99]);
+      echo "&nbsp;"._n('Day', 'Days', 2)."</td></tr>";
+      echo "</td></tr>";
+
+      echo "<tr class='tab_bg_2'>";
+      echo "<td>" . __('Tickets waiting for user response alert', 'additionalalerts') . "</td><td>";
+      Alert::dropdownIntegerNever('delay_ticket_waiting_user',
+                                  $this->fields["delay_ticket_waiting_user"],
+                                  ['max'=>99]);
+      echo "&nbsp;"._n('Day', 'Days', 2)."</td></tr>";
+      echo "</td></tr>";
+
+      echo "<tr class='tab_bg_2'>";
+      echo "<td>" . __('Technician open tickets threshold alert', 'additionalalerts') . "</td><td>";
+      Alert::dropdownIntegerNever('max_open_tickets_tech',
+                                  $this->fields["max_open_tickets_tech"],
+                                  ['max'=>99]);
+      echo "&nbsp;"._n('Ticket', 'Tickets', 2)."</td></tr>";
+      echo "</td></tr>";
+
+      echo "<tr class='tab_bg_2'>";
+      echo "<td>" . __('High priority ticket alert', 'additionalalerts') . "</td><td>";
+      Alert::dropdownIntegerNever('delay_ticket_high_priority',
+                                  $this->fields["delay_ticket_high_priority"],
+                                  ['max'=>99]);
+      echo "&nbsp;"._n('Day', 'Days', 2)."</td></tr>";
+      echo "</td></tr>";
+
       echo "<tr class='tab_bg_2'><td class='center' colspan='2'>";
       echo Html::hidden('id', ['value' => 1]);
       echo "</td></tr>";
@@ -159,6 +191,22 @@ class PluginAdditionalalertsConfig extends CommonDBTM {
 
    public function getDelayTicketAlert() {
       return $this->fields['delay_ticket_alert'];
+   }
+
+   public function getDelayTicketWaitingValidation() {
+      return $this->fields['delay_ticket_waiting_validation'];
+   }
+
+   public function getDelayTicketWaitingUser() {
+      return $this->fields['delay_ticket_waiting_user'];
+   }
+
+   public function getMaxOpenTicketsTech() {
+      return $this->fields['max_open_tickets_tech'];
+   }
+
+   public function getDelayTicketHighPriority() {
+      return $this->fields['delay_ticket_high_priority'];
    }
 }
 
