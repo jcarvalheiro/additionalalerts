@@ -27,6 +27,27 @@ Ce plugin vous permet d'envoyer les alertes email supplémentaires :
 * Alerte maintenance planifiée ou en retard
 * Alerte nombre élevé de pannes/incidents
 
+#### Alertes contrôle qualité (qualité de la CMDB)
+* Ordinateurs/moniteurs/périphériques avec modèle, fabricant, OS, numéro d’inventaire, numéro de série ou date d’achat manquants ou incohérents
+* Équipements avec doublons détectés (numéro de série, inventaire, nom)
+* Équipements affectés à des utilisateurs ou services désactivés/inexistants
+* Équipements dont la date d’achat est postérieure à la date de mise en service ou de garantie
+* Équipements avec informations obsolètes (OS ou firmware non supporté, version logicielle trop ancienne)
+* Équipements sans historique de mouvement ou de maintenance
+* Équipements présents dans des lieux supprimés ou non référencés
+* Équipements avec relations incomplètes (ex : ordinateur sans moniteur alors que la politique l’exige)
+* Équipements avec statuts incohérents (ex : matériel « en stock » mais affecté à un utilisateur)
+* Équipements dont la dernière modification date de plus d’un an (risque d’obsolescence des données)
+* Équipements sans sauvegarde déclarée ou sans sauvegarde récente
+* Ordinateurs/périphériques avec stockage saturé (disque plein)
+* Équipements avec incidents récurrents (plus de X incidents sur une période)
+* Équipements sans maintenance préventive planifiée
+* Périphériques connectés mais non utilisés depuis X jours
+* Équipements avec firmware obsolète
+* Équipements sans affectation réseau (pas d’IP ou non vus sur le réseau depuis X jours)
+* Ordinateurs sans antivirus actif ou à jour
+* Ordinateurs sans périphériques critiques (écran, clavier, souris, etc.)
+
 Chaque alerte est activable/désactivable via l'interface web et dispose de son propre modèle de notification GLPI (email configurable).
 
 ### English
@@ -53,5 +74,26 @@ This plugin enables you to send supplementary email alerts:
 * Equipment with obsolete or missing location
 * Maintenance alert (planned or overdue maintenance)
 * High incident count alert (equipment with many incidents/failures)
+
+#### Quality control alerts (CMDB data quality)
+* Computers/monitors/peripherals with missing or inconsistent required fields (model, manufacturer, OS, inventory number, serial number, buy date)
+* Equipment with detected duplicates (serial number, inventory number, name)
+* Equipment assigned to disabled/nonexistent users or services
+* Equipment with buy date after warranty or commissioning date
+* Equipment with obsolete information (unsupported OS/firmware, outdated software version)
+* Equipment with no movement or maintenance history
+* Equipment located in deleted or unreferenced locations
+* Equipment with incomplete relations (e.g. computer without monitor when required)
+* Equipment with inconsistent status (e.g. "in stock" but assigned to a user)
+* Equipment not modified for over a year (risk of obsolete data)
+* Equipment without declared backup or without recent backup
+* Computers/peripherals with full storage (disk nearly full)
+* Equipment with recurring incidents (more than X incidents in a period)
+* Equipment without scheduled preventive maintenance
+* Peripherals connected but unused for X days
+* Equipment with outdated firmware
+* Equipment without network assignment (no IP or not seen on network for X days)
+* Computers without active or up-to-date antivirus
+* Computers missing critical peripherals (screen, keyboard, mouse, etc.)
 
 Each alert can be enabled/disabled via the web interface and has its own GLPI notification template (configurable email).

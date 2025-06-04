@@ -499,6 +499,46 @@ class PluginAdditionalalertsAdditionalalert extends CommonDBTM {
          echo '<h2>' . __('High incident alert', 'additionalalerts') . '</h2>';
          PluginAdditionalalertsEquipmentHighIncidentAlert::displayAlerts();
       }
+      if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityMissingFieldsAlert()) {
+            echo '<h2>' . __('Missing or inconsistent required fields', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityMissingFieldsAlert::displayAlerts();
+        }
+        if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityDuplicatesAlert()) {
+            echo '<h2>' . __('Detected duplicates', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityDuplicatesAlert::displayAlerts();
+        }
+        if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityBadAssignmentAlert()) {
+            echo '<h2>' . __('Assignment to disabled/nonexistent user or service', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityBadAssignmentAlert::displayAlerts();
+        }
+        if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityDateCoherenceAlert()) {
+            echo '<h2>' . __('Incoherent dates (buy > warranty/commissioning)', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityDateCoherenceAlert::displayAlerts();
+        }
+        if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityObsoleteInfoAlert()) {
+            echo '<h2>' . __('Obsolete information (unsupported OS/firmware/version)', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityObsoleteInfoAlert::displayAlerts();
+        }
+        if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityNoMoveHistoryAlert()) {
+            echo '<h2>' . __('No move or maintenance history', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityNoMoveHistoryAlert::displayAlerts();
+        }
+        if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityBadLocationRefAlert()) {
+            echo '<h2>' . __('Deleted or unreferenced location', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityBadLocationRefAlert::displayAlerts();
+        }
+        if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityIncompleteRelationAlert()) {
+            echo '<h2>' . __('Incomplete relations (e.g. computer without monitor)', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityIncompleteRelationAlert::displayAlerts();
+        }
+        if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityBadStatusAlert()) {
+            echo '<h2>' . __('Inconsistent status (e.g. in stock but assigned)', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityBadStatusAlert::displayAlerts();
+        }
+        if (PluginAdditionalalertsConfig::getConfig()->useEquipmentQualityOldModifAlert()) {
+            echo '<h2>' . __('Not modified for over a year', 'additionalalerts') . '</h2>';
+            PluginAdditionalalertsEquipmentQualityOldModifAlert::displayAlerts();
+        }
     }
 
    public static function getNotificationTargets() {
@@ -513,7 +553,16 @@ class PluginAdditionalalertsAdditionalalert extends CommonDBTM {
             'equipmentbadlocation' => 'PluginAdditionalalertsNotificationTargetEquipmentBadLocationAlert',
             'equipmentmaintenance' => 'PluginAdditionalalertsNotificationTargetEquipmentMaintenanceAlert',
             'equipmenthighincident' => 'PluginAdditionalalertsNotificationTargetEquipmentHighIncidentAlert',
-            // ...autres cibles existantes...
+            'equipmentqualitymissingfields' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityMissingFieldsAlert',
+            'equipmentqualityduplicates' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityDuplicatesAlert',
+            'equipmentqualitybadassignment' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityBadAssignmentAlert',
+            'equipmentqualitydatecoherence' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityDateCoherenceAlert',
+            'equipmentqualityobsoleteinfo' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityObsoleteInfoAlert',
+            'equipmentqualitynomovehistory' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityNoMoveHistoryAlert',
+            'equipmentqualitybadlocationref' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityBadLocationRefAlert',
+            'equipmentqualityincompleterelation' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityIncompleteRelationAlert',
+            'equipmentqualitybadstatus' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityBadStatusAlert',
+            'equipmentqualityoldmodif' => 'PluginAdditionalalertsNotificationTargetEquipmentQualityOldModifAlert',
         ];
     }
 

@@ -302,3 +302,43 @@ msgstr "Aucun équipement avec un nombre élevé de pannes"
 
 msgid "Equipments with high incident count:"
 msgstr "Équipements avec un nombre élevé de pannes :"
+
+#: inc/equipmentqualitymissingfieldsalert.class.php
+msgid "Missing or inconsistent required fields"
+msgstr "Champs obligatoires manquants ou incohérents"
+
+#: inc/equipmentqualityduplicatesalert.class.php
+msgid "Detected duplicates"
+msgstr "Doublons détectés"
+
+#: inc/equipmentqualitybadassignmentalert.class.php
+msgid "Assignment to disabled/nonexistent user or service"
+msgstr "Affectation à un utilisateur ou service désactivé/inexistant"
+
+#: inc/equipmentqualitydatecoherencealert.class.php
+msgid "Incoherent dates (buy > warranty/commissioning)"
+msgstr "Incohérence de dates (achat > garantie/mise en service)"
+
+#: inc/equipmentqualityobsoleteinfoalert.class.php
+msgid "Obsolete information (unsupported OS/firmware/version)"
+msgstr "Informations obsolètes (OS/firmware/version non supporté)"
+
+#: inc/equipmentqualitynomovehistoryalert.class.php
+msgid "No move or maintenance history"
+msgstr "Aucun historique de mouvement ou de maintenance"
+
+#: inc/equipmentqualitybadlocationrefalert.class.php
+msgid "Deleted or unreferenced location"
+msgstr "Lieu supprimé ou non référencé"
+
+#: inc/equipmentqualityincompleterelationalert.class.php
+msgid "Incomplete relations (e.g. computer without monitor)"
+msgstr "Relations incomplètes (ex : ordinateur sans moniteur)"
+
+#: inc/equipmentqualitybadstatusalert.class.php
+msgid "Inconsistent status (e.g. in stock but assigned)"
+msgstr "Statut incohérent (ex : en stock mais affecté)"
+
+#: inc/equipmentqualityoldmodifalert.class.php
+msgid "Not modified for over a year"
+msgstr "Non modifié depuis plus d'un an"

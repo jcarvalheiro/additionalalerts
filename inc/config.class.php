@@ -258,5 +258,35 @@ class PluginAdditionalalertsConfig extends CommonDBTM {
    public function useEquipmentHighIncidentAlert() {
       return isset($this->fields['use_equipment_highincident_alert']) ? $this->fields['use_equipment_highincident_alert'] : 0;
    }
+   public function useEquipmentQualityMissingFieldsAlert() {
+      return isset($this->fields['use_equipment_quality_missingfields_alert']) ? $this->fields['use_equipment_quality_missingfields_alert'] : 0;
+   }
+   public function useEquipmentQualityDuplicatesAlert() {
+      return isset($this->fields['use_equipment_quality_duplicates_alert']) ? $this->fields['use_equipment_quality_duplicates_alert'] : 0;
+   }
+   public function useEquipmentQualityBadAssignmentAlert() {
+      return isset($this->fields['use_equipment_quality_badassignment_alert']) ? $this->fields['use_equipment_quality_badassignment_alert'] : 0;
+   }
+   public function useEquipmentQualityDateCoherenceAlert() {
+      return isset($this->fields['use_equipment_quality_datecoherence_alert']) ? $this->fields['use_equipment_quality_datecoherence_alert'] : 0;
+   }
+   public function useEquipmentQualityObsoleteInfoAlert() {
+      return isset($this->fields['use_equipment_quality_obsoleteinfo_alert']) ? $this->fields['use_equipment_quality_obsoleteinfo_alert'] : 0;
+   }
+   public function useEquipmentQualityNoMoveHistoryAlert() {
+      return isset($this->fields['use_equipment_quality_nomovehistory_alert']) ? $this->fields['use_equipment_quality_nomovehistory_alert'] : 0;
+   }
+   public function useEquipmentQualityBadLocationRefAlert() {
+      return isset($this->fields['use_equipment_quality_badlocationref_alert']) ? $this->fields['use_equipment_quality_badlocationref_alert'] : 0;
+   }
+   public function useEquipmentQualityIncompleteRelationAlert() {
+      return isset($this->fields['use_equipment_quality_incompleterelation_alert']) ? $this->fields['use_equipment_quality_incompleterelation_alert'] : 0;
+   }
+   public function useEquipmentQualityBadStatusAlert() {
+      return isset($this->fields['use_equipment_quality_badstatus_alert']) ? $this->fields['use_equipment_quality_badstatus_alert'] : 0;
+   }
+   public function useEquipmentQualityOldModifAlert() {
+      return isset($this->fields['use_equipment_quality_oldmodif_alert']) ? $this->fields['use_equipment_quality_oldmodif_alert'] : 0;
+   }
 }
 

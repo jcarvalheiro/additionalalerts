@@ -286,3 +286,43 @@ msgstr "No equipment with high incident count"
 
 msgid "Equipments with high incident count:"
 msgstr "Equipments with high incident count:"
+
+#: inc/equipmentqualitymissingfieldsalert.class.php
+msgid "Missing or inconsistent required fields"
+msgstr "Missing or inconsistent required fields"
+
+#: inc/equipmentqualityduplicatesalert.class.php
+msgid "Detected duplicates"
+msgstr "Detected duplicates"
+
+#: inc/equipmentqualitybadassignmentalert.class.php
+msgid "Assignment to disabled/nonexistent user or service"
+msgstr "Assignment to disabled/nonexistent user or service"
+
+#: inc/equipmentqualitydatecoherencealert.class.php
+msgid "Incoherent dates (buy > warranty/commissioning)"
+msgstr "Incoherent dates (buy > warranty/commissioning)"
+
+#: inc/equipmentqualityobsoleteinfoalert.class.php
+msgid "Obsolete information (unsupported OS/firmware/version)"
+msgstr "Obsolete information (unsupported OS/firmware/version)"
+
+#: inc/equipmentqualitynomovehistoryalert.class.php
+msgid "No move or maintenance history"
+msgstr "No move or maintenance history"
+
+#: inc/equipmentqualitybadlocationrefalert.class.php
+msgid "Deleted or unreferenced location"
+msgstr "Deleted or unreferenced location"
+
+#: inc/equipmentqualityincompleterelationalert.class.php
+msgid "Incomplete relations (e.g. computer without monitor)"
+msgstr "Incomplete relations (e.g. computer without monitor)"
+
+#: inc/equipmentqualitybadstatusalert.class.php
+msgid "Inconsistent status (e.g. in stock but assigned)"
+msgstr "Inconsistent status (e.g. in stock but assigned)"
+
+#: inc/equipmentqualityoldmodifalert.class.php
+msgid "Not modified for over a year"
+msgstr "Not modified for over a year"
